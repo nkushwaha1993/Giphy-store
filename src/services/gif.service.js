@@ -2,12 +2,13 @@ import axios from "axios";
 import { api_key } from "../utils/constant";
 import { GIF_API } from "../utils/endpoint";
 
-export const getGifTrendingLogic = async () => {
+export const getGifTrendingLogic = async (offset) => {
   let trendingData = null;
   try {
     trendingData = await axios(GIF_API.TRENDING_API, {
       params: {
-        api_key
+        api_key,
+        offset
       }
     });
   } catch {
@@ -24,7 +25,7 @@ export const getGifDataBySearchLogic = async (inputSearch, offset) => {
       params: {
         api_key,
         q: inputSearch,
-        offset: offset
+        offset
       }
     });
   } catch {

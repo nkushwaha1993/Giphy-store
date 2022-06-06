@@ -18,13 +18,14 @@ const GifResults = ({ results, showLoader, setOffset }) => {
 
   return (
     <div className="gif-results">
-      {results?.map((gif, index) => {
-        if (results.length === index + 1) {
-          return <GifImage ref={lastGifIndex} key={gif.id} gif={gif} />;
-        } else {
-          return <GifImage key={gif.id} gif={gif} />;
-        }
-      })}
+      {results &&
+        results?.map((gif, index) => {
+          if (results.length === index + 1) {
+            return <GifImage ref={lastGifIndex} key={gif.id} gif={gif} />;
+          } else {
+            return <GifImage key={gif.id} gif={gif} />;
+          }
+        })}
     </div>
   );
 };

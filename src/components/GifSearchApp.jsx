@@ -15,21 +15,24 @@ const GifSearchApp = () => {
   const [offset, setOffset] = useState(0);
   const [inputSearch, setInputSearch] = useState("");
 
-  const getGifTrendingData = () => {
-    setShowLoader(true);
-    getGifTrendingLogic().then((data) => {
-      setShowLoader(false);
-      setGifData(data);
-    });
+  const updateGifResult = (data) => {
+    setShowLoader(false);
+    setGifData((prevGifData) => [
+      ...prevGifData,
+      ...data.filter((val) =>
+        prevGifData.every((preVal) => val.id !== preVal.id)
+      )
+    ]);
   };
 
   useEffect(() => {
     inputSearch
       ? getGifDataBySearchLogic(inputSearch, offset).then((data) => {
-          setShowLoader(false);
-          setGifData((prevGifData) => [...prevGifData, ...data]);
+          updateGifResult(data);
         })
-      : gifData && gifData.length === 0 && getGifTrendingData();
+      : getGifTrendingLogic(offset).then((data) => {
+          updateGifResult(data);
+        });
   }, [offset, inputSearch]);
 
   const onSearchChange = (inputSearch) => {
