@@ -9,7 +9,7 @@ const GifResults = ({ results, showLoader, setOffset }) => {
       if (showLoader) return;
       observer.current && observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        entries[0].isIntersecting && setOffset((prevOffset) => prevOffset + 1);
+        entries[0].isIntersecting && setOffset((prevOffset) => prevOffset + 50);
       });
       element && observer.current.observe(element);
     },

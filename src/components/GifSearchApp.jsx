@@ -17,12 +17,7 @@ const GifSearchApp = () => {
 
   const updateGifResult = (data) => {
     setShowLoader(false);
-    setGifData((prevGifData) => [
-      ...prevGifData,
-      ...data.filter((val) =>
-        prevGifData.every((preVal) => val.id !== preVal.id)
-      )
-    ]);
+    setGifData((prevGifData) => [...new Set([...prevGifData, ...data])]);
   };
 
   useEffect(() => {
